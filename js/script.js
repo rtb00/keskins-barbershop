@@ -38,11 +38,11 @@ const navbar = document.querySelector('.navbar');
 const navbarLogo = document.querySelector('.logo-container');
 let lastScroll = 0;
 
-// Initially hide the navbar logo
-if (navbarLogo) {
-    navbarLogo.style.opacity = '0';
-    navbarLogo.style.transition = 'opacity 0.5s ease';
-}
+// Initially hide the navbar logo - now handled in CSS
+// if (navbarLogo) {
+//     navbarLogo.style.opacity = '0';
+//     navbarLogo.style.transition = 'opacity 0.5s ease';
+// }
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
