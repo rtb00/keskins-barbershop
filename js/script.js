@@ -38,21 +38,17 @@ const navbar = document.querySelector('.navbar');
 const navbarLogo = document.querySelector('.logo-container');
 let lastScroll = 0;
 
-// Initially hide the navbar logo - now handled in CSS
-// if (navbarLogo) {
-//     navbarLogo.style.opacity = '0';
-//     navbarLogo.style.transition = 'opacity 0.5s ease';
-// }
-
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     const aboutSection = document.querySelector('#about');
 
-    // Add shadow when scrolled
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.8)';
+    // Hide navbar on scroll down, show on scroll up (direkt ab 1px)
+    if (currentScroll > lastScroll && currentScroll > 1) {
+        // Scrolling down - hide navbar
+        navbar.classList.add('hidden');
     } else {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+        // Scrolling up - show navbar
+        navbar.classList.remove('hidden');
     }
 
     // Show/hide logo based on scroll position
