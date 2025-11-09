@@ -33,18 +33,36 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar background on scroll and logo fade-in
 const navbar = document.querySelector('.navbar');
+const navbarLogo = document.querySelector('.logo-container');
 let lastScroll = 0;
+
+// Initially hide the navbar logo
+if (navbarLogo) {
+    navbarLogo.style.opacity = '0';
+    navbarLogo.style.transition = 'opacity 0.5s ease';
+}
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
+    const aboutSection = document.querySelector('#about');
 
     // Add shadow when scrolled
     if (currentScroll > 100) {
         navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.8)';
     } else {
         navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
+    }
+
+    // Show/hide logo based on scroll position
+    if (aboutSection && navbarLogo) {
+        const aboutPosition = aboutSection.offsetTop - 100;
+        if (currentScroll >= aboutPosition) {
+            navbarLogo.style.opacity = '1';
+        } else {
+            navbarLogo.style.opacity = '0';
+        }
     }
 
     lastScroll = currentScroll;
@@ -153,11 +171,21 @@ if (scrollIndicator) {
 
 // Add parallax effect to hero section
 window.addEventListener('scroll', () => {
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent && window.pageYOffset < window.innerHeight) {
+    const heroSection = document.querySelector('.hero');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+
+    if (heroSection && window.pageYOffset < window.innerHeight) {
         const scrolled = window.pageYOffset;
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.opacity = 1 - scrolled / 700;
+        // Sehr langsames, spätes Fade-Out über die gesamte Hero-Section
+        const opacity = 1 - scrolled / 1500;
+
+        // Fade-Out für die gesamte Hero-Section
+        heroSection.style.opacity = Math.max(0, opacity);
+
+        // Scroll-Indikator ebenfalls ausfaden
+        if (scrollIndicator) {
+            scrollIndicator.style.opacity = Math.max(0, opacity);
+        }
     }
 });
 
