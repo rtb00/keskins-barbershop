@@ -174,17 +174,22 @@ window.addEventListener('scroll', () => {
     const heroSection = document.querySelector('.hero');
     const scrollIndicator = document.querySelector('.scroll-indicator');
 
-    if (heroSection && window.pageYOffset < window.innerHeight) {
+    if (heroSection) {
         const scrolled = window.pageYOffset;
-        // Sehr langsames, spätes Fade-Out über die gesamte Hero-Section
-        const opacity = 1 - scrolled / 1500;
+        let opacity = 1;
+
+        // Fade-Out beginnt erst viel später, fast bei der zweiten Section
+        if (scrolled > 800) { // Start fade-out after 800px scroll
+            const fadeProgress = (scrolled - 800) / 1000; // Fade over next 1000px
+            opacity = Math.max(0.3, 1 - fadeProgress); // Minimum 30%
+        }
 
         // Fade-Out für die gesamte Hero-Section
-        heroSection.style.opacity = Math.max(0, opacity);
+        heroSection.style.opacity = opacity;
 
         // Scroll-Indikator ebenfalls ausfaden
         if (scrollIndicator) {
-            scrollIndicator.style.opacity = Math.max(0, opacity);
+            scrollIndicator.style.opacity = opacity;
         }
     }
 });
