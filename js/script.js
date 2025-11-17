@@ -1,5 +1,13 @@
 // Keskin's Barbershop - JavaScript
 
+// Entferne loading class nach DOM geladen ist
+document.addEventListener('DOMContentLoaded', () => {
+    // Kurzer Delay um sicherzustellen dass CSS geladen ist
+    setTimeout(() => {
+        document.body.classList.remove('loading');
+    }, 100);
+});
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -64,51 +72,53 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Animate elements on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
+// Animate elements on scroll - nur nach dem Laden initialisieren
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
     });
-}, observerOptions);
 
-// Observe service cards
-document.querySelectorAll('.service-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
+    // Observe package cards
+    document.querySelectorAll('.package-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
 
-// Observe package cards
-document.querySelectorAll('.package-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
+    // Observe gallery items
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.9)';
+        item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
 
-// Observe gallery items
-document.querySelectorAll('.gallery-item').forEach((item, index) => {
-    item.style.opacity = '0';
-    item.style.transform = 'scale(0.9)';
-    item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-    observer.observe(item);
-});
-
-// Observe feature boxes
-document.querySelectorAll('.feature-box').forEach((box, index) => {
-    box.style.opacity = '0';
-    box.style.transform = 'translateY(30px)';
-    box.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
-    observer.observe(box);
+    // Observe feature boxes
+    document.querySelectorAll('.feature-box').forEach((box, index) => {
+        box.style.opacity = '0';
+        box.style.transform = 'translateY(30px)';
+        box.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+        observer.observe(box);
+    });
 });
 
 // Active navigation highlight

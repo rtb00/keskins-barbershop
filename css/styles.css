@@ -41,6 +41,12 @@ body {
     overflow-x: hidden;
 }
 
+/* Verhindere Transitions beim initialen Laden */
+body.loading * {
+    transition: none !important;
+    animation-duration: 0s !important;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -291,9 +297,12 @@ h4 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: opacity 0.1s ease-out;
     padding: 120px 0 120px;
-    /* Mehr Padding oben und unten */
+    opacity: 1;
+}
+
+body:not(.loading) .hero {
+    transition: opacity 0.1s ease-out;
 }
 
 .hero-overlay {

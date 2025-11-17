@@ -9,11 +9,16 @@
         content="Keskin's Barbershop - Ihr Herrenfriseur in Mainz-Kostheim. 13 Jahre Erfahrung, moderne Atmosphäre. Haarschnitt, Bartpflege, Styling.">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <!-- Hauptfavicon für Google Search (absoluter Pfad vom Root) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload kritische Ressourcen -->
+    <link rel="preload" href="images/barber_shop.jpg" as="image">
+    <link rel="preload" href="images/logo.png" as="image">
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +28,7 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body class="loading">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
