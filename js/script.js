@@ -119,6 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
         box.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
         observer.observe(box);
     });
+
+    // Scroll reveal animation for about section (observer is in scope here)
+    const aboutContent = document.querySelector('.about-content');
+    if (aboutContent) {
+        aboutContent.style.opacity = '0';
+        aboutContent.style.transform = 'translateY(50px)';
+        aboutContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(aboutContent);
+    }
 });
 
 // Active navigation highlight
@@ -154,15 +163,6 @@ document.querySelectorAll('.gallery-item').forEach(item => {
         }, 200);
     });
 });
-
-// Scroll reveal animation for about section
-const aboutContent = document.querySelector('.about-content');
-if (aboutContent) {
-    aboutContent.style.opacity = '0';
-    aboutContent.style.transform = 'translateY(50px)';
-    aboutContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    observer.observe(aboutContent);
-}
 
 // Hero scroll indicator click
 const scrollIndicator = document.querySelector('.scroll-indicator');
